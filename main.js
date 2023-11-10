@@ -822,7 +822,7 @@ class CsvReaderService {
   getCsvData() {
     var _this = this;
     return (0,C_Users_z004c7wn_Desktop_responsive_maps_node_modules_angular_devkit_build_angular_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const csvUrl = '/assets/points.csv';
+      const csvUrl = '/responsive-map-uk/points.csv';
       try {
         const data = yield (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.lastValueFrom)(_this.http.get(csvUrl, {
           responseType: 'text'
