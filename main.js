@@ -528,9 +528,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _services_csv_reader_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/csv-reader.service */ 2944);
 /* harmony import */ var _envs_env_prod__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../envs/env.prod */ 8086);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 3620);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 3997);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 5879);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 6814);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 6223);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 6814);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 6223);
+
 
 
 
@@ -620,7 +623,7 @@ class SearchComponent {
     this.language = _envs_env_prod__WEBPACK_IMPORTED_MODULE_1__.APP_CONFIG.language;
     this.searchItem = '';
     this.selectedOption = 'all';
-    this.searchData$ = this.csvReaderService.filteredDataSubject.asObservable();
+    this.searchData$ = this.csvReaderService.filteredDataSubject.asObservable().pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_3__.debounceTime)(200), (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.distinctUntilChanged)());
     this.cities = [];
   }
   ngOnInit() {
@@ -642,7 +645,6 @@ class SearchComponent {
     this.csvReaderService.updateCity(this.selectedOption);
   }
   navigateTo(result) {
-    // this.csvReaderService.navigateTo(result.geometry.coordinates.latitude, result.geometry.coordinates.longitude)
     this.csvReaderService.focusTo(result.geometry.coordinates.latitude, result.geometry.coordinates.longitude);
   }
   clearSearchInput() {
@@ -702,10 +704,10 @@ class SearchComponent {
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("placeholder", ctx.language === "en" ? "Search..." : ctx.language === "da" ? "H\u013Eada\u0165..." : "\u041F\u043E\u0448\u0443\u043A...")("ngModel", ctx.searchItem);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind1"](11, 8, ctx.searchData$));
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx.searchItem.length > 0 && _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵpipeBind1"](11, 8, ctx.searchData$));
       }
     },
-    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgSelectOption, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵNgSelectMultipleOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.SelectControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgModel, _angular_common__WEBPACK_IMPORTED_MODULE_3__.AsyncPipe],
+    dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_5__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgIf, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgSelectOption, _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ɵNgSelectMultipleOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_6__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.SelectControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgModel, _angular_common__WEBPACK_IMPORTED_MODULE_5__.AsyncPipe],
     styles: ["\n\n\n\n.search-container[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 8px;\n  transform: translateX(50%);\n  z-index: 1500;\n}\n@media (max-width: 576px) {\n  .search-container[_ngcontent-%COMP%] {\n    right: 42%;\n  }\n}\n@media (min-width: 577px) and (max-width: 768px) {\n  .search-container[_ngcontent-%COMP%] {\n    right: 42%;\n  }\n}\n@media (min-width: 769px) and (max-width: 992px) {\n  .search-container[_ngcontent-%COMP%] {\n    right: 60%;\n  }\n}\n@media (min-width: 993px) and (max-width: 1200px) {\n  .search-container[_ngcontent-%COMP%] {\n    right: 60%;\n  }\n}\n@media (min-width: 1201px) {\n  .search-container[_ngcontent-%COMP%] {\n    right: 40%;\n    transform: translateX(10%);\n  }\n}\n\n#search-input[_ngcontent-%COMP%] {\n  padding: 10px;\n  width: 300px;\n  border: 1px solid #ccc;\n  border-radius: 5px;\n}\n\n.autocomplete-results[_ngcontent-%COMP%] {\n  position: absolute;\n  top: calc(100% + 5px); \n\n  left: 0;\n  max-height: 200px;\n  overflow-y: auto;\n  padding: 10px;\n  margin-top: 0px;\n  border-radius: 0 0 5px 5px;\n  background-color: #fff;\n  opacity: 0; \n\n  pointer-events: none; \n\n  transition: opacity 0.2s ease; \n\n}\n@media (max-width: 576px) {\n  .autocomplete-results[_ngcontent-%COMP%] {\n    width: calc(100% - 25px); \n\n  }\n}\n@media (min-width: 577px) and (max-width: 768px) {\n  .autocomplete-results[_ngcontent-%COMP%] {\n    width: calc(100% - 110px);\n  }\n}\n@media (min-width: 769px) and (max-width: 992px) {\n  .autocomplete-results[_ngcontent-%COMP%] {\n    width: calc(100% - 25px);\n  }\n}\n@media (min-width: 993px) and (max-width: 1200px) {\n  .autocomplete-results[_ngcontent-%COMP%] {\n    width: calc(100% - 110px);\n  }\n}\n@media (min-width: 1201px) {\n  .autocomplete-results[_ngcontent-%COMP%] {\n    width: calc(100% - 25px);\n  }\n}\n\n.search-container[_ngcontent-%COMP%]:focus-within   .autocomplete-results[_ngcontent-%COMP%] {\n  opacity: 1; \n\n  pointer-events: auto; \n\n}\n\n.autocomplete-results[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\n  padding: 10px;\n  list-style: none;\n  cursor: pointer;\n}\n\n.autocomplete-results[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]:hover {\n  background-color: #f0f0f0;\n}\n\n.select-dropdown[_ngcontent-%COMP%] {\n  padding: 10px;\n  width: 321px;\n  border: 1px solid #ccc;\n  border-radius: 5px;\n  background-color: #fff;\n  color: #333;\n}\n\n.select-dropdown[_ngcontent-%COMP%]:hover {\n  border-color: #aaa;\n}\n\n\n\n.select-dropdown[_ngcontent-%COMP%]:after {\n  content: \"\\f078\"; \n\n  position: absolute;\n  top: 50%;\n  right: 10px;\n  transform: translateY(-50%);\n}\n\n\n\n.select-dropdown[_ngcontent-%COMP%]:focus {\n  border-color: #aaa;\n  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);\n}\n\n\n\n.select-dropdown[_ngcontent-%COMP%]::-ms-expand {\n  display: none;\n}\n\n\n\n.select-dropdown[_ngcontent-%COMP%]   option[_ngcontent-%COMP%] {\n  background-color: #fff;\n  color: #333;\n}\n\n\n\n.select-dropdown[_ngcontent-%COMP%]   option[_ngcontent-%COMP%]:hover {\n  background-color: #f0f0f0;\n}\n\n\n\n.select-dropdown[_ngcontent-%COMP%]   option[_ngcontent-%COMP%]:focus {\n  background-color: #f0f0f0;\n}\n\n\n\n.search-input-container[_ngcontent-%COMP%] {\n  position: relative;\n  display: inline-block;\n}\n\n\n\n.close-button[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 10px;\n  right: 5%;\n  transform: translateX(50%);\n  cursor: pointer;\n  font-size: 16px;\n  color: #555;\n  z-index: 1500px;\n}\n\n.close-button[_ngcontent-%COMP%]:hover {\n  color: #333; \n\n}"]
   });
 }
@@ -822,7 +824,7 @@ class CsvReaderService {
   getCsvData() {
     var _this = this;
     return (0,C_Users_z004c7wn_Desktop_responsive_maps_node_modules_angular_devkit_build_angular_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const csvUrl = '/responsive-map-uk/points.csv';
+      const csvUrl = `/assets/points_${_envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'en' ? "en" : _envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'da' ? "sk" : "uk"}.csv`;
       try {
         const data = yield (0,rxjs__WEBPACK_IMPORTED_MODULE_7__.lastValueFrom)(_this.http.get(csvUrl, {
           responseType: 'text'
@@ -938,6 +940,15 @@ class CsvReaderService {
       }
     });
     if (this.map) this.map.addLayer(this.markers);
+    this.markers.on("click", event => {
+      let clickedMarker = event.layer;
+      const originalLatLng = clickedMarker.getLatLng();
+      const adjustedLatLng = {
+        lat: originalLatLng.lat + 0.005,
+        lng: originalLatLng.lng
+      };
+      this.map?.setView(adjustedLatLng);
+    });
   }
   createMarker(feature) {
     const iconURL = this.getCategoryImage(feature.properties.Category);
@@ -959,15 +970,17 @@ class CsvReaderService {
     return `
       <div class="popup-container">
           <h2>${feature.properties.name}</h2>
-          <p>Category: ${feature.properties.category}</p>
-          <p>City: ${feature.properties.city}</p>
-          <p>Address: ${feature.properties.address}</p>
-          <p>Website: ${feature.properties.website}</a>
-          <p>Contact: ${feature.properties.contact}</p>
-          <p>Email: ${feature.properties.email}</p>
-          <p>Description: ${feature.properties.description}</p>
+          <p>${_envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'en' ? "Category" : _envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'da' ? "Kategória" : "Категорія"}: ${feature.properties.category}</p>
+          <p>${_envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'en' ? "City" : _envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'da' ? "Mesto" : "Місто"}: ${feature.properties.city}</p>
+          <p>${_envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'en' ? "Address" : _envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'da' ? "Adresa" : "Адреса"}: ${feature.properties.address}</p>
+          <p>${_envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'en' ? "Website" : _envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'da' ? "Webová stránka" : "Веб-сайт"}: <a href="${feature.properties.website}" target="_blank">${feature.properties.website}</a></p>
+          <p>${_envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'en' ? "Contact" : _envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'da' ? "Kontakt" : "Контакт"}: ${feature.properties.contact}</p>
+          <p>${_envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'en' ? "Email" : _envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'da' ? "E-mail" : "Електронна пошта"}: ${feature.properties.email}</p>
+          <p>${_envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'en' ? "Description" : _envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'da' ? "Popis" : "Опис"}: ${feature.properties.description}</p>
           <div class="navigate-button-container">
-          <button id="navigateButton" class="navigate-button" latitude="${feature.geometry.coordinates.latitude}" longitude="${feature.geometry.coordinates.longitude}">Navigate</button>
+          <button id="navigateButton" class="navigate-button" latitude="${feature.geometry.coordinates.latitude}" longitude="${feature.geometry.coordinates.longitude}">
+            ${_envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'en' ? "Navigate" : _envs_env_prod__WEBPACK_IMPORTED_MODULE_5__.APP_CONFIG.language === 'da' ? "Navigovať" : "Навігація"}
+          </button>
           </div>
       </div>
     `;
